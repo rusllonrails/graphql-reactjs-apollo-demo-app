@@ -3,10 +3,10 @@ const graphql = require('graphql');
 const { GraphQLObjectType, GraphQLString, GraphQLSchema, GraphQLID, GraphQLInt } = graphql;
 
 const movies = [
-  { id: 1, name: 'Pelky Blinders', genre: 'Crime' },
-  { id: 2, name: 'Patriot', genre: 'Comedy' },
-  { id: 3, name: 'Pink Panter', genre: 'Cartoon' },
-  { id: 4, name: 'Terminator 2', genre: 'Action' }
+  { id: 1, name: 'Pelky Blinders', genre: 'Crime', directorId: 2 },
+  { id: 2, name: 'Patriot', genre: 'Comedy', directorId: 1 },
+  { id: 3, name: 'Pink Panter', genre: 'Cartoon', directorId: 4 },
+  { id: 4, name: 'Terminator 2', genre: 'Action', directorId: 3 }
 ];
 
 const directors = [
@@ -21,7 +21,13 @@ const MovieType = new GraphQLObjectType({
   fields: () => ({
     id: { type: GraphQLID },
     name: { type: GraphQLString },
-    genre: { type: GraphQLString }
+    genre: { type: GraphQLString },
+    director: {
+      type: DirectorType,
+      resolve(parent, args) {
+        return directors.find(director => director.id == parent.directorId);
+      }
+    }
   })
 });
 
