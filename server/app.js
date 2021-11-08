@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = 3005;
 
-mongoose.connect(`mongodb+srv://${process.env.M_USER}:${process.env.M_PASS}@testcluster.toqac.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb+srv://${process.env.M_USER}:${process.env.M_PASS}@testcluster.toqac.mongodb.net/graphql-react-apollo?retryWrites=true&w=majority`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use('/graphql', graphqlHTTP({
   schema,
