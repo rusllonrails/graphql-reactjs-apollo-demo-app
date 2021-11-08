@@ -70,7 +70,52 @@ const Mutation = new GraphQLObjectType({
 
         return data.save();
       }
-    }
+    },
+    removeMovie: {
+      type: MovieType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Movies.findByIdAndRemove(args.id);
+      }
+    },
+    removeDirector: {
+      type: DirectorType,
+      args: { id: { type: GraphQLID } },
+      resolve(parent, args) {
+        return Directors.findByIdAndRemove(args.id);
+      }
+    },
+    updateMovie: {
+      type: MovieType,
+      args: {
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        genre: { type: GraphQLString },
+        directorId: { type: GraphQLID }
+      },
+      resolve(parent, args) {
+        return Movies.findByIdAndUpdate(
+          args.id,
+          { $set: { name: args.name, genre: args.genre, directorId: args.directorId } },
+          { new: true }
+        );
+      }
+    },
+    updateDirector: {
+      type: DirectorType,
+      args: {
+        id: { type: GraphQLID },
+        name: { type: GraphQLString },
+        age: { type: GraphQLInt }
+      },
+      resolve(parent, args) {
+        return Directors.findByIdAndUpdate(
+          args.id,
+          { $set: { name: args.name, age: args.age } },
+          { new: true }
+        );
+      }
+    },
   }
 })
 
