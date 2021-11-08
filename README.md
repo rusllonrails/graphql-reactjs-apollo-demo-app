@@ -14,7 +14,15 @@ MongoDB provider https://cloud.mongodb.com/
 npm install
 ```
 
-2) Run Node - Express JS server:
+2) Add environment variables
+
+```shell
+cp .env.example .env
+```
+
+Set creds to real in `.env` file
+
+3) Run Node - Express JS server:
 
 ```shell
 npm run dev
